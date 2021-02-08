@@ -108,6 +108,11 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 
 	const handleOnDragStart = (event) => {
 		setIsDragging(true);
+		event.dataTransfer.setDragImage(
+			wrapperRef.current,
+			wrapperRef.current.clientWidth / 2,
+			wrapperRef.current.clientHeight / 2
+		);
 		event.dataTransfer.setData('text', JSON.stringify(data));
 	};
 
@@ -156,7 +161,11 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 					onDragStart={handleOnDragStart}
 					onDragEnd={handleOnDragEnd}
 				>
-					<VStack css={{ paddingBottom: 16 }} spacing={3}>
+					<VStack
+						css={{ paddingBottom: 16 }}
+						spacing={3}
+						data-dragging={isDragging}
+					>
 						<Snapshot
 							data-dragging={isDragging}
 							ref={wrapperRef}
