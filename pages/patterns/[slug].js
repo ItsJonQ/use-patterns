@@ -9,6 +9,8 @@ import {
 	Button,
 	Heading,
 	Text,
+	Surface,
+	Elevation,
 	HStack,
 } from '@wp-g2/components';
 import copy from 'copy-to-clipboard';
@@ -49,6 +51,7 @@ const ContentFrame = ({ content }) => {
 						border: 'none',
 						width: '100%',
 						height: '100%',
+						userSelect: 'none',
 					}}
 				>
 					<Animated
@@ -58,6 +61,9 @@ const ContentFrame = ({ content }) => {
 					>
 						<div onClick={() => handleOnClick(content)}>
 							<div
+								style={{
+									userSelect: 'none',
+								}}
 								dangerouslySetInnerHTML={{
 									__html: content,
 								}}
@@ -76,17 +82,27 @@ const RESIZABLE_DEFAULT_WIDTH =
 
 const DragHandle = () => (
 	<View
+		as="button"
+		title="Drag to resize"
 		css={{
+			appearance: 'none',
+			border: 'none',
+			padding: 0,
+			outline: 'none',
 			position: 'absolute',
 			top: 'clamp(100px, 500px, 40vh)',
 			left: 7,
-			background: 'rgba(0,0,0,0.3)',
+			background: 'rgba(255,255,255,0.2)',
 			borderRadius: 99999,
 			height: 60,
 			width: 6,
 			cursor: 'grab',
-			'&:active': {
+			'*:hover > &': {
+				background: 'rgba(255,255,255,0.3)',
+			},
+			'*:active > &': {
 				cursor: 'grabbing',
+				background: 'rgba(255,255,255,0.5)',
 			},
 		}}
 	/>
@@ -95,7 +111,7 @@ const DragHandle = () => (
 export default function Post({ post }) {
 	const router = useRouter();
 	const [x, setX] = React.useState(0);
-	const width = `calc(90% - ${x}px)`;
+	const width = `calc(100% - ${x}px)`;
 
 	const dragGestures = useDrag((dp) => {
 		const { dir } = dp.args[0];
@@ -134,36 +150,48 @@ export default function Post({ post }) {
 				<div>Loading…</div>
 			) : (
 				<div>
-					<VStack
-						css={{ height: 80, padding: '8px 20px' }}
-						alignment="center"
-					>
-						<Container>
-							<HStack>
-								<View>
-									<Link href="/">
-										<a>
-											<Text>Patterns</Text>
-										</a>
-									</Link>
-									<Heading>{post.title}</Heading>
-								</View>
-								<View>
-									<Button
-										variant="primary"
-										onClick={handleOnClick}
-									>
-										Copy
-									</Button>
-								</View>
-							</HStack>
-						</Container>
-					</VStack>
+					<Surface css={{ position: 'relative', zIndex: 100 }}>
+						<VStack
+							css={{ height: 70, padding: '8px 20px' }}
+							alignment="center"
+						>
+							<Container>
+								<HStack>
+									<VStack spacing={1}>
+										<Link href="/">
+											<a
+												style={{
+													textDecoration: 'none',
+												}}
+											>
+												<Text
+													weight={600}
+													variant="muted"
+												>
+													Patterns
+												</Text>
+											</a>
+										</Link>
+										<Heading size={4}>{post.title}</Heading>
+									</VStack>
+									<View>
+										<Button
+											variant="primary"
+											onClick={handleOnClick}
+										>
+											Copy
+										</Button>
+									</View>
+								</HStack>
+							</Container>
+						</VStack>
+						<Elevation value={5} css={{ opacity: 0.2 }} />
+					</Surface>
 					<View
 						css={{
-							background: '#ddd',
+							background: '#111',
 							padding: '0 20px',
-							height: 'calc(100vh - 80px)',
+							height: 'calc(100vh - 70px)',
 							overflow: 'hidden',
 						}}
 					>
@@ -182,7 +210,7 @@ export default function Post({ post }) {
 									position: 'absolute',
 									top: 0,
 									bottom: 0,
-									background: 'rgba(255,255,255,0.2)',
+									background: 'rgba(255,255,255,0.08)',
 									left: -20,
 									width: 20,
 									cursor: 'grab',
@@ -196,9 +224,12 @@ export default function Post({ post }) {
 							</View>
 							<View
 								css={{
-									borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-									borderRight: '1px solid rgba(0, 0, 0, 0.2)',
+									borderLeft: '1px solid rgba(0, 0, 0, 0.04)',
+									borderRight:
+										'1px solid rgba(0, 0, 0, 0.04)',
 									height: '100%',
+									position: 'relative',
+									zIndex: 1,
 								}}
 							>
 								<ContentFrame {...post} />
@@ -209,7 +240,7 @@ export default function Post({ post }) {
 									top: 0,
 									bottom: 0,
 									right: -20,
-									background: 'rgba(255,255,255,0.2)',
+									background: 'rgba(255,255,255,0.08)',
 									width: 20,
 									cursor: 'grab',
 									'&:active': {
