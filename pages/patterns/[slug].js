@@ -11,46 +11,22 @@ import {
 	HStack,
 } from '@wp-g2/components';
 import copy from 'copy-to-clipboard';
-import Frame, { FrameContextConsumer } from 'react-frame-component';
+import Frame from 'react-frame-component';
 import { getPatternBySlug, getAllPatterns } from '../../lib/api';
 import Link from 'next/link';
 import { useDrag } from 'react-use-gesture';
 
 const initialFrameContent = `
-<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/tt1.css" /><style>body { padding: 20px;  }</style></head><body><div></div></body></html>
+<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/tt1.css" /><style>body { padding: 20px; pointer-events: none; }</style></head><body><div></div></body></html>
 `;
 
 const ContentFrame = ({ content }) => {
 	const handleOnClick = (p) => {
 		copy(p, { format: 'text/plain' });
 	};
-	const wrapperRef = React.useRef();
-	const [frameHeight, setFrameHeight] = React.useState('100%');
-	const [frameDocument, setFrameDocument] = React.useState();
-	const [frameWindow, setFrameWindow] = React.useState();
-
-	React.useEffect(() => {
-		const handleOnResize = () => {
-			if (!frameDocument) return;
-			try {
-				requestAnimationFrame(() => {
-					setFrameHeight(frameDocument.body.clientHeight);
-				});
-			} catch (err) {}
-		};
-
-		handleOnResize();
-		frameWindow?.addEventListener('load', handleOnResize);
-		window.addEventListener('resize', handleOnResize);
-
-		return () => {
-			window.addEventListener('resize', handleOnResize);
-		};
-	}, [frameDocument, frameDocument?.body?.clientHeight, frameWindow]);
 
 	return (
 		<div
-			ref={wrapperRef}
 			style={{
 				width: '100%',
 				lineHeight: 0,
@@ -72,7 +48,6 @@ const ContentFrame = ({ content }) => {
 						border: 'none',
 						width: '100%',
 						height: '100%',
-						pointerEvents: 'none',
 					}}
 				>
 					<Animated
@@ -88,14 +63,6 @@ const ContentFrame = ({ content }) => {
 							/>
 						</div>
 					</Animated>
-
-					<FrameContextConsumer>
-						{({ document, window }) => {
-							// Render Children
-							setFrameWindow(window);
-							setFrameDocument(document);
-						}}
-					</FrameContextConsumer>
 				</Frame>
 			</Animated>
 		</div>
@@ -181,6 +148,7 @@ export default function Post({ post }) {
 							background: '#ddd',
 							padding: '0 20px',
 							height: 'calc(100vh - 80px)',
+							overflow: 'hidden',
 						}}
 					>
 						<div
