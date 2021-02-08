@@ -17,6 +17,7 @@ import copy from 'copy-to-clipboard';
 import Frame from 'react-frame-component';
 import { getPatternBySlug, getAllPatterns } from '../../lib/api';
 import Link from 'next/link';
+import { parse } from '@wordpress/block-serialization-default-parser';
 import { useDrag } from 'react-use-gesture';
 
 const initialFrameContent = `
@@ -113,6 +114,14 @@ export default function Post({ post }) {
 	const router = useRouter();
 	const [x, setX] = React.useState(0);
 	const width = `calc(100% - ${x}px)`;
+	const frameContainerRef = React.useRef();
+
+	const data = {
+		type: 'inserter',
+		blocks: parse(post.content.trim()),
+		rawContent: post.content.trim(),
+		contentSrc: 'use_patterns',
+	};
 
 	const dragGestures = useDrag((dp) => {
 		const { dir } = dp.args[0];
@@ -121,6 +130,10 @@ export default function Post({ post }) {
 			setX((prev) => prev + dp.delta[0] * multiplier);
 		}
 	});
+
+	const handleOnDragStart = (event) => {
+		event.dataTransfer.setData('text', JSON.stringify(data));
+	};
 
 	const handleOnClick = () => {
 		copy(post.content, { format: 'text/plain' });
@@ -176,13 +189,28 @@ export default function Post({ post }) {
 										<Heading size={4}>{post.title}</Heading>
 									</VStack>
 									<View>
-										<Button
-											variant="primary"
-											size="large"
-											onClick={handleOnClick}
-										>
-											Copy Pattern
-										</Button>
+										<HStack>
+											<Button
+												draggable
+												size="large"
+												onDragStart={handleOnDragStart}
+												css={`
+													cursor: grab;
+													&:active {
+														cursor: grabbing;
+													}
+												`}
+											>
+												Drag/Drop
+											</Button>
+											<Button
+												variant="primary"
+												size="large"
+												onClick={handleOnClick}
+											>
+												Copy Pattern
+											</Button>
+										</HStack>
 									</View>
 								</HStack>
 							</Container>
@@ -234,7 +262,12 @@ export default function Post({ post }) {
 									zIndex: 1,
 								}}
 							>
-								<ContentFrame {...post} />
+								<div
+									ref={frameContainerRef}
+									style={{ height: '100%' }}
+								>
+									<ContentFrame {...post} />
+								</div>
 							</View>
 							<View
 								css={{

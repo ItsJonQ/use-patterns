@@ -176,13 +176,25 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 								</HStack>
 							</Actions>
 							<Overlay>
-								<Text
-									color="currentColor"
-									weight={600}
-									size={14}
-								>
-									Preview
-								</Text>
+								<VStack spacing={1}>
+									<Text
+										color="currentColor"
+										weight={600}
+										size={18}
+										align="center"
+									>
+										Preview
+									</Text>
+									<Text
+										color="currentColor"
+										weight={600}
+										size={12}
+										align="center"
+										css={{ opacity: 0.8 }}
+									>
+										or Drag to Editor
+									</Text>
+								</VStack>
 							</Overlay>
 							<Frame
 								title={title}
