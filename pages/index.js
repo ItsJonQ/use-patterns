@@ -21,7 +21,7 @@ import { SEO, SiteFooter, ThemeSwitcher } from '../components';
 import copy from 'copy-to-clipboard';
 
 const initialFrameContent = `
-<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link id="theme-stylesheet" rel="stylesheet" href="/stylesheets/twentytwentyone.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; overflow: hidden; margin: 0; }</style></head><body><div></div></body></html>
+<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link id="theme-stylesheet" rel="stylesheet" href="/stylesheets/twentytwentyone.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; overflow: hidden; margin: 0; padding: 40px; }</style></head><body><div></div></body></html>
 `;
 
 const Snapshot = styled.div`
@@ -30,10 +30,22 @@ const Snapshot = styled.div`
 	cursor: pointer;
 	position: relative;
 	border-radius: 12px;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04) inset;
 
 	&:active {
 		cursor: grabbing;
 	}
+`;
+
+const SnapshotBorder = styled.div`
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	border-radius: 12px;
+	right: 0;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04) inset;
+	z-index: 3;
 `;
 
 const Actions = styled.div`
@@ -185,6 +197,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 								height: frameHeight,
 							}}
 						>
+							<SnapshotBorder />
 							<Actions>
 								<HStack alignment="right">
 									<Card css={{ padding: 2 }}>
