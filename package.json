@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@wordpress/block-serialization-default-parser": "3.9.1",
     "@wordpress/data": "latest",
     "@wordpress/i18n": "latest",
     "@wordpress/icons": "latest",

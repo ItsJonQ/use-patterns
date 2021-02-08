@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Grid, View, Animated } from '@wp-g2/components';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
 import { getAllPatterns } from '../lib/api';
+import { parse } from '@wordpress/block-serialization-default-parser';
 
 const initialFrameContent = `
 <!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/tt1.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; }</style></head><body><div></div></body></html>
@@ -13,6 +14,13 @@ const ContentFrame = ({ content, slug, index }) => {
 	const [frameHeight, setFrameHeight] = React.useState('100%');
 	const [frameDocument, setFrameDocument] = React.useState();
 	const [frameScale, setFrameScale] = React.useState(0.3125);
+
+	const data = { type: 'inserter', blocks: parse(content.trim()) };
+
+	const handleOnDragStart = (event) => {
+		// event.dataTransfer.setData('text', JSON.stringify(data));
+		event.dataTransfer.setData('text', content);
+	};
 
 	React.useEffect(() => {
 		const handleOnResize = () => {
@@ -49,7 +57,11 @@ const ContentFrame = ({ content, slug, index }) => {
 				}}
 			>
 				<Link as={`/patterns/${slug}`} href="/patterns/[slug]" passHref>
-					<a style={{ display: 'block', height: '100%' }}>
+					<a
+						style={{ display: 'block', height: '100%' }}
+						draggable
+						onDragStart={handleOnDragStart}
+					>
 						<Frame
 							initialContent={initialFrameContent}
 							style={{

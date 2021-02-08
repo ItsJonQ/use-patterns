@@ -340,6 +340,13 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
+"@wordpress/block-serialization-default-parser@3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@wordpress/block-serialization-default-parser/-/block-serialization-default-parser-3.9.1.tgz#9aac03ca5d8a850e9bde44e894c91686bb7a064d"
+  integrity sha512-Pr0JGWAX0xS3cP7kVBZCrzfVqgeVU0Nz8+FuIXAtKEyCtgCO+bbmdfGaaRMnlSh6lO6r7MZ7wjPMqdfoVMKl6Q==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
 "@wordpress/compose@^3.24.3":
   version "3.24.3"
   resolved "https://registry.yarnpkg.com/@wordpress/compose/-/compose-3.24.3.tgz#458fa394873f1ce8be5ebd2ff17828f0aad3ddfc"
