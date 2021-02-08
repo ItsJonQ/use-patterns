@@ -53,7 +53,7 @@ date: '2021-02-07 11:00:00'
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":4} -->
-<h4 class="mb3">Built on Core</h4>
+<h4 class="mb3">Core</h4>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"fontSize":"extra-small"} -->

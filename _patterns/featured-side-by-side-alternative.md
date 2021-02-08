@@ -37,7 +37,7 @@ date: '2021-02-07 10:00:00'
     <p class="has-extra-small-font-size o-70 mt0 mb3">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
     <!-- /wp:paragraph -->
     <!-- wp:heading {"level":4} -->
-    <h4 class="mb3">Built on Core</h4>
+    <h4 class="mb3">Core</h4>
     <!-- /wp:heading -->
     <!-- wp:paragraph {"fontSize":"extra-small"} -->
     <p class="has-extra-small-font-size o-70 mt0 mb3">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
