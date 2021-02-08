@@ -1,13 +1,12 @@
-import { ThemeProvider } from '@wp-g2/styles';
-// import '../styles/block-library-styles.css';
-// import '../styles/tt1.css';
-// import '../styles/tachyons.css';
 import '../styles/global.css';
+
+import { ThemeProvider } from '@wp-g2/styles';
+import theme from '../lib/theme';
 
 export default function MyApp({ Component, pageProps }) {
 	return (
 		<>
-			<ThemeProvider />
+			<ThemeProvider theme={theme} isGlobal />
 			<Component {...pageProps} />
 		</>
 	);

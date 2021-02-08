@@ -177,9 +177,10 @@ export default function Post({ post }) {
 									<View>
 										<Button
 											variant="primary"
+											size="large"
 											onClick={handleOnClick}
 										>
-											Copy
+											Copy Pattern
 										</Button>
 									</View>
 								</HStack>
