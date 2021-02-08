@@ -196,8 +196,8 @@ export default function Post({ post }) {
 							overflow: 'hidden',
 						}}
 					>
-						<div
-							style={{
+						<View
+							css={{
 								width,
 								margin: 'auto',
 								minWidth: 320,
@@ -252,7 +252,7 @@ export default function Post({ post }) {
 							>
 								<DragHandle />
 							</View>
-						</div>
+						</View>
 					</View>
 				</div>
 			)}
