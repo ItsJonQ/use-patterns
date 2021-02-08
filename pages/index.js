@@ -28,6 +28,10 @@ const Snapshot = styled.div`
 	cursor: pointer;
 	position: relative;
 	border-radius: 12px;
+
+	&:active {
+		cursor: grabbing;
+	}
 `;
 
 const Actions = styled.div`
@@ -43,6 +47,10 @@ const Actions = styled.div`
 	*:hover > & {
 		opacity: 1;
 		pointer-events: initial;
+	}
+
+	[data-dragging='true'] > & {
+		display: none;
 	}
 `;
 
@@ -76,6 +84,10 @@ const Overlay = styled.div`
 	*:active > & {
 		opacity: 0.5;
 	}
+
+	[data-dragging='true'] > & {
+		display: none;
+	}
 `;
 
 const ContentFrame = ({ categories = [], content, slug, index, title }) => {
@@ -84,12 +96,22 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 	const [frameDocument, setFrameDocument] = React.useState();
 	const [frameScale, setFrameScale] = React.useState(0.3125);
 	const [category] = categories;
+	const [isDragging, setIsDragging] = React.useState(false);
 
-	const data = { type: 'inserter', blocks: parse(content.trim()) };
+	const data = {
+		type: 'inserter',
+		blocks: parse(content.trim()),
+		rawContent: content.trim(),
+		contentSrc: 'use_patterns',
+	};
 
 	const handleOnDragStart = (event) => {
-		// event.dataTransfer.setData('text', JSON.stringify(data));
-		event.dataTransfer.setData('text', content);
+		setIsDragging(true);
+		event.dataTransfer.setData('text', JSON.stringify(data));
+	};
+
+	const handleOnDragEnd = (event) => {
+		setIsDragging(false);
 	};
 
 	const handleOnClick = (event) => {
@@ -131,9 +153,11 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 					}}
 					draggable
 					onDragStart={handleOnDragStart}
+					onDragEnd={handleOnDragEnd}
 				>
 					<VStack css={{ paddingBottom: 16 }} spacing={3}>
 						<Snapshot
+							data-dragging={isDragging}
 							ref={wrapperRef}
 							style={{
 								height: frameHeight,

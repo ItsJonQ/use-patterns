@@ -226,7 +226,7 @@ const patternContent = `
 <div class="wp-block-column" style="flex-basis:60%">
 
 <!-- wp:heading {"fontSize":"80px","lineHeight":"1.1"} -->
-<h2 class="mt0" style="font-size:80px;line-height:1.1"><strong>A better way to build blocks</strong></h2>
+<h2 class="mt0" style="font-size:80px;line-height:1.1"><strong>A better way to build</strong></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"fontSize":"large","lineHeight":"1.6"} -->

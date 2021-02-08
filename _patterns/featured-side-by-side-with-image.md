@@ -9,7 +9,7 @@ date: '2021-02-07 11:00:00'
 <div class="wp-block-group alignwide" style="padding-top:10vh;padding-bottom:10vh"><div class="wp-block-group__inner-container">
 
 <!-- wp:heading {"textAlign":"center","fontSize":"extra-large"} -->
-<h2 class="has-text-align-center has-extra-large-font-size mt0"><strong>A better way to build blocks</strong></h2>
+<h2 class="has-text-align-center has-extra-large-font-size mt0"><strong>A better way to build</strong></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","fontSize":"small"} -->

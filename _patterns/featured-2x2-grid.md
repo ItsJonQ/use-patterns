@@ -11,7 +11,7 @@ date: '2021-02-07 09:00:00'
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"textAlign":"center","fontSize":"extra-large"} -->
-<h2 class="has-text-align-center has-extra-large-font-size mt0"><strong>A better way to build blocks</strong></h2>
+<h2 class="has-text-align-center has-extra-large-font-size mt0"><strong>A better way to build</strong></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","fontSize":"small"} -->

@@ -13,7 +13,7 @@ date: '2021-02-07 18:25:00'
 <div class="wp-block-column" style="flex-basis:55%">
 
 <!-- wp:heading -->
-<h2 class="f2 f1-l mt0 lh-solid"><strong>A better way to build pages with blocks and patterns</strong></h2>
+<h2 class="f2 f1-l mt0 lh-solid"><strong>A better way to build with blocks and patterns</strong></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"dsadsa","fontSize":"large","style":{"typography":{"lineHeight":"1.6"}}} -->
