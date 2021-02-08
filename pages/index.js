@@ -16,6 +16,7 @@ import { styled } from '@wp-g2/styles';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
 import { getAllPatterns } from '../lib/api';
 import { parse } from '@wordpress/block-serialization-default-parser';
+import { SEO } from '../components';
 import copy from 'copy-to-clipboard';
 
 const initialFrameContent = `
@@ -67,10 +68,10 @@ const Overlay = styled.div`
 	z-index: 1;
 	background: linear-gradient(
 		to bottom,
-		rgba(0, 0, 0, 0.16) 0%,
-		rgba(0, 0, 0, 0.16) 70%,
-		rgba(0, 0, 0, 0.16) 71%,
-		rgba(0, 0, 0, 0.5) 100%
+		rgba(0, 0, 0, 0.24) 0%,
+		rgba(0, 0, 0, 0.24) 70%,
+		rgba(0, 0, 0, 0.24) 71%,
+		rgba(0, 0, 0, 0.6) 100%
 	);
 	pointer-events: none;
 	opacity: 0;
@@ -251,21 +252,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 export default function Home({ posts }) {
 	return (
 		<View>
-			<Head>
-				<title>Patterns</title>
-				<link rel="icon" href="/favicon.ico" />
-				<link
-					rel="preload"
-					as="style"
-					href="/stylesheets/tachyons.css"
-				/>
-				<link
-					rel="preload"
-					as="style"
-					href="/stylesheets/block-library-styles.css"
-				/>
-				<link rel="preload" as="style" href="/stylesheets/tt1.css" />
-			</Head>
+			<SEO />
 			<Container css={{ padding: 20 }}>
 				<Heading>Patterns</Heading>
 			</Container>

@@ -16,6 +16,7 @@ import {
 import copy from 'copy-to-clipboard';
 import Frame from 'react-frame-component';
 import { getPatternBySlug, getAllPatterns } from '../../lib/api';
+import { SEO } from '../../components';
 import Link from 'next/link';
 import { parse } from '@wordpress/block-serialization-default-parser';
 import { useDrag } from 'react-use-gesture';
@@ -145,21 +146,7 @@ export default function Post({ post }) {
 
 	return (
 		<div>
-			<Head>
-				<title>Patterns</title>
-				<link rel="icon" href="/favicon.ico" />
-				<link
-					rel="preload"
-					as="style"
-					href="/stylesheets/tachyons.css"
-				/>
-				<link
-					rel="preload"
-					as="style"
-					href="/stylesheets/block-library-styles.css"
-				/>
-				<link rel="preload" as="style" href="/stylesheets/tt1.css" />
-			</Head>
+			<SEO title={post.title} />
 			{router.isFallback ? (
 				<div>Loading…</div>
 			) : (
