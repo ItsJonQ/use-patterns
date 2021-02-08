@@ -42,7 +42,21 @@ export default function SEO({
 				as="style"
 				href="/stylesheets/block-library-styles.css"
 			/>
-			<link rel="preload" as="style" href="/stylesheets/tt1.css" />
+			<link
+				rel="preload"
+				as="style"
+				href="/stylesheets/twentytwentyone.css"
+			/>
+			<link
+				rel="preload"
+				as="style"
+				href="/stylesheets/twentytwenty.css"
+			/>
+			<link
+				rel="preload"
+				as="style"
+				href="/stylesheets/twentynineteen.css"
+			/>
 		</Head>
 	);
 }

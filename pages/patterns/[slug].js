@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import ErrorPage from 'next/error';
 import {
 	View,
@@ -12,20 +11,34 @@ import {
 	Surface,
 	Elevation,
 	HStack,
+	Spacer,
 } from '@wp-g2/components';
 import copy from 'copy-to-clipboard';
-import Frame from 'react-frame-component';
+import Frame, { FrameContextConsumer } from 'react-frame-component';
 import { getPatternBySlug, getAllPatterns } from '../../lib/api';
-import { SEO } from '../../components';
+import { useAppTheme } from '../../lib/appState';
+import { SEO, ThemeSwitcher } from '../../components';
 import Link from 'next/link';
 import { parse } from '@wordpress/block-serialization-default-parser';
 import { useDrag } from 'react-use-gesture';
 
 const initialFrameContent = `
-<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/tt1.css" /><style>body { padding: 20px; pointer-events: none; }</style></head><body><div></div></body></html>
+<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/twentytwentyone.css" id="theme-stylesheet" /><style>body { padding: 20px; pointer-events: none; }</style></head><body><div></div></body></html>
 `;
 
 const ContentFrame = ({ content, title }) => {
+	const styleRef = React.useRef();
+	const [theme] = useAppTheme();
+	const [frameDocument, setFrameDocument] = React.useState();
+
+	React.useEffect(() => {
+		if (!frameDocument) return;
+		if (!styleRef.current) {
+			styleRef.current = frameDocument.querySelector('#theme-stylesheet');
+		}
+		styleRef.current.setAttribute('href', `/stylesheets/${theme}.css`);
+	}, [theme, frameDocument]);
+
 	const handleOnClick = (p) => {
 		copy(p, { format: 'text/plain' });
 	};
@@ -57,6 +70,11 @@ const ContentFrame = ({ content, title }) => {
 						userSelect: 'none',
 					}}
 				>
+					<FrameContextConsumer>
+						{({ document }) => {
+							setFrameDocument(document);
+						}}
+					</FrameContextConsumer>
 					<Animated
 						animate={{ opacity: 1 }}
 						initial={{ opacity: 0 }}
@@ -197,6 +215,12 @@ export default function Post({ post }) {
 											>
 												Copy Pattern
 											</Button>
+											<Spacer>
+												<View css={{ width: 8 }} />
+											</Spacer>
+											<View>
+												<ThemeSwitcher />
+											</View>
 										</HStack>
 									</View>
 								</HStack>

@@ -15,12 +15,13 @@ import {
 import { styled } from '@wp-g2/styles';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
 import { getAllPatterns } from '../lib/api';
+import { useAppTheme } from '../lib/appState';
 import { parse } from '@wordpress/block-serialization-default-parser';
-import { SEO } from '../components';
+import { SEO, SiteFooter, ThemeSwitcher } from '../components';
 import copy from 'copy-to-clipboard';
 
 const initialFrameContent = `
-<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/tt1.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; }</style></head><body><div></div></body></html>
+<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link id="theme-stylesheet" rel="stylesheet" href="/stylesheets/twentytwentyone.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; overflow: hidden; margin: 0; }</style></head><body><div></div></body></html>
 `;
 
 const Snapshot = styled.div`
@@ -93,11 +94,22 @@ const Overlay = styled.div`
 
 const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 	const wrapperRef = React.useRef();
+	const styleRef = React.useRef();
 	const [frameHeight, setFrameHeight] = React.useState('100%');
-	const [frameDocument, setFrameDocument] = React.useState();
 	const [frameScale, setFrameScale] = React.useState(0.3125);
 	const [category] = categories;
 	const [isDragging, setIsDragging] = React.useState(false);
+
+	const [theme] = useAppTheme();
+	const [frameDocument, setFrameDocument] = React.useState();
+
+	React.useEffect(() => {
+		if (!frameDocument) return;
+		if (!styleRef.current) {
+			styleRef.current = frameDocument.querySelector('#theme-stylesheet');
+		}
+		styleRef.current.setAttribute('href', `/stylesheets/${theme}.css`);
+	}, [theme, frameDocument]);
 
 	const data = {
 		type: 'inserter',
@@ -130,7 +142,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 		const handleOnResize = () => {
 			try {
 				setFrameHeight(wrapperRef.current.clientWidth);
-				setFrameScale(wrapperRef.current.clientWidth / 1280);
+				setFrameScale(wrapperRef.current.clientWidth / 1400);
 			} catch (err) {}
 		};
 
@@ -211,8 +223,8 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 								initialContent={initialFrameContent}
 								style={{
 									border: 'none',
-									width: '1280px',
-									height: '1280px',
+									width: '1400px',
+									height: '1400px',
 									transform: `scale(${frameScale})`,
 									transformOrigin: 'top left',
 									pointerEvents: 'none',
@@ -237,7 +249,6 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 								</Animated>
 								<FrameContextConsumer>
 									{({ document }) => {
-										// Render Children
 										setFrameDocument(document);
 									}}
 								</FrameContextConsumer>
@@ -263,11 +274,15 @@ export default function Home({ posts }) {
 		<View>
 			<SEO />
 			<Container css={{ padding: 20 }}>
-				<Heading>Patterns</Heading>
+				<HStack>
+					<Heading>Patterns</Heading>
+					<View>
+						<ThemeSwitcher />
+					</View>
+				</HStack>
 			</Container>
 			<Container
 				css={{
-					marginBottom: '20vh',
 					padding: 20,
 				}}
 			>
@@ -297,6 +312,7 @@ export default function Home({ posts }) {
 					))}
 				</Grid>
 			</Container>
+			<SiteFooter />
 		</View>
 	);
 }
