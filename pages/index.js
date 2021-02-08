@@ -45,6 +45,7 @@ const SnapshotBorder = styled.div`
 	border-radius: 12px;
 	right: 0;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04) inset;
+	pointer-events: none;
 	z-index: 3;
 `;
 
@@ -173,111 +174,107 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 			initial={{ opacity: 0, y: 10 }}
 			transition={{ delay: Math.min(0.1 * (index + 1), 1) }}
 		>
-			<Link as={`/patterns/${slug}`} href="/patterns/[slug]" passHref>
-				<a
-					style={{
-						display: 'block',
-						height: '100%',
-						textDecoration: 'none',
-						outline: 'none',
-					}}
-					draggable
-					onDragStart={handleOnDragStart}
-					onDragEnd={handleOnDragEnd}
+			<a
+				href={`/patterns/${slug}`}
+				style={{
+					display: 'block',
+					height: '100%',
+					textDecoration: 'none',
+					outline: 'none',
+				}}
+				draggable
+				onDragStart={handleOnDragStart}
+				onDragEnd={handleOnDragEnd}
+			>
+				<VStack
+					css={{ paddingBottom: 16 }}
+					spacing={3}
+					data-dragging={isDragging}
 				>
-					<VStack
-						css={{ paddingBottom: 16 }}
-						spacing={3}
+					<Snapshot
 						data-dragging={isDragging}
+						ref={wrapperRef}
+						style={{
+							height: frameHeight,
+						}}
 					>
-						<Snapshot
-							data-dragging={isDragging}
-							ref={wrapperRef}
+						<SnapshotBorder />
+						<Actions>
+							<HStack alignment="right">
+								<Card css={{ padding: 2 }}>
+									<Button isSubtle onClick={handleOnClick}>
+										Copy
+									</Button>
+								</Card>
+							</HStack>
+						</Actions>
+						<Overlay>
+							<VStack spacing={1}>
+								<Text
+									color="currentColor"
+									weight={600}
+									size={18}
+									align="center"
+								>
+									Preview
+								</Text>
+								<Text
+									color="currentColor"
+									weight={600}
+									size={12}
+									align="center"
+									css={{ opacity: 0.8 }}
+								>
+									or Drag to Editor
+								</Text>
+							</VStack>
+						</Overlay>
+						<Frame
+							title={title}
+							initialContent={initialFrameContent}
 							style={{
-								height: frameHeight,
+								border: 'none',
+								width: '1400px',
+								height: '1400px',
+								transform: `scale(${frameScale})`,
+								transformOrigin: 'top left',
+								pointerEvents: 'none',
 							}}
 						>
-							<SnapshotBorder />
-							<Actions>
-								<HStack alignment="right">
-									<Card css={{ padding: 2 }}>
-										<Button
-											isSubtle
-											onClick={handleOnClick}
-										>
-											Copy
-										</Button>
-									</Card>
-								</HStack>
-							</Actions>
-							<Overlay>
-								<VStack spacing={1}>
-									<Text
-										color="currentColor"
-										weight={600}
-										size={18}
-										align="center"
-									>
-										Preview
-									</Text>
-									<Text
-										color="currentColor"
-										weight={600}
-										size={12}
-										align="center"
-										css={{ opacity: 0.8 }}
-									>
-										or Drag to Editor
-									</Text>
-								</VStack>
-							</Overlay>
-							<Frame
-								title={title}
-								initialContent={initialFrameContent}
-								style={{
-									border: 'none',
-									width: '1400px',
-									height: '1400px',
-									transform: `scale(${frameScale})`,
-									transformOrigin: 'top left',
-									pointerEvents: 'none',
-								}}
+							<Animated
+								animate={{ opacity: 1 }}
+								initial={{ opacity: 0 }}
+								transition={{ delay: 0.1 }}
 							>
-								<Animated
-									animate={{ opacity: 1 }}
-									initial={{ opacity: 0 }}
-									transition={{ delay: 0.1 }}
-								>
-									<div>
-										<div
-											dangerouslySetInnerHTML={{
-												__html: content,
-											}}
-											style={{
-												pointerEvents: 'none',
-												userSelect: 'none',
-											}}
-										/>
-									</div>
-								</Animated>
-								<FrameContextConsumer>
-									{({ document }) => {
-										setFrameDocument(document);
-									}}
-								</FrameContextConsumer>
-							</Frame>
-						</Snapshot>
-						<VStack spacing={1}>
-							<Text weight={500} css={{ opacity: 0.5 }} size={12}>
-								{category}
-							</Text>
-							<Heading size={4} weight={600} truncate>
-								{title}
-							</Heading>
-						</VStack>
+								<div>
+									<div
+										dangerouslySetInnerHTML={{
+											__html: content,
+										}}
+										style={{
+											pointerEvents: 'none',
+											userSelect: 'none',
+										}}
+									/>
+								</div>
+							</Animated>
+							<FrameContextConsumer>
+								{({ document }) => {
+									setFrameDocument(document);
+								}}
+							</FrameContextConsumer>
+						</Frame>
+					</Snapshot>
+					<VStack spacing={1}>
+						<Text weight={500} css={{ opacity: 0.5 }} size={12}>
+							{category}
+						</Text>
+						<Heading size={4} weight={600} truncate>
+							{title}
+						</Heading>
 					</VStack>
-				</a>
-			</Link>
+				</VStack>
+			</a>
 		</Animated>
 	);
 };
