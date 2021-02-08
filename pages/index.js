@@ -5,7 +5,7 @@ import Frame, { FrameContextConsumer } from 'react-frame-component';
 import { getAllPatterns } from '../lib/api';
 
 const initialFrameContent = `
-<!DOCTYPE html><html><head><link type="text/css" rel="stylesheet" href="/stylesheets/tachyons.css" /><link type="text/css" rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link type="text/css" rel="stylesheet" href="/stylesheets/tt1.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; }</style></head><body><div></div></body></html>
+<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/tt1.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; }</style></head><body><div></div></body></html>
 `;
 
 const ContentFrame = ({ content, slug, index }) => {
@@ -99,6 +99,17 @@ export default function Home({ posts }) {
 			<Head>
 				<title>Patterns</title>
 				<link rel="icon" href="/favicon.ico" />
+				<link
+					rel="preload"
+					as="style"
+					href="/stylesheets/tachyons.css"
+				/>
+				<link
+					rel="preload"
+					as="style"
+					href="/stylesheets/block-library-styles.css"
+				/>
+				<link rel="preload" as="style" href="/stylesheets/tt1.css" />
 			</Head>
 			<div
 				style={{
