@@ -23,7 +23,7 @@ const initialFrameContent = `
 <!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/tt1.css" /><style>body { padding: 20px; pointer-events: none; }</style></head><body><div></div></body></html>
 `;
 
-const ContentFrame = ({ content }) => {
+const ContentFrame = ({ content, title }) => {
 	const handleOnClick = (p) => {
 		copy(p, { format: 'text/plain' });
 	};
@@ -46,6 +46,7 @@ const ContentFrame = ({ content }) => {
 				}}
 			>
 				<Frame
+					title={title}
 					initialContent={initialFrameContent}
 					style={{
 						border: 'none',

@@ -161,6 +161,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 								</Text>
 							</Overlay>
 							<Frame
+								title={title}
 								initialContent={initialFrameContent}
 								style={{
 									border: 'none',
