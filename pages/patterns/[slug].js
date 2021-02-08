@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import ErrorPage from 'next/error';
 import {
 	View,
@@ -114,6 +115,10 @@ export default function Post({ post }) {
 
 	return (
 		<div>
+			<Head>
+				<title>Patterns</title>
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
 			{router.isFallback ? (
 				<div>Loading…</div>
 			) : (

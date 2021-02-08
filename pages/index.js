@@ -97,7 +97,7 @@ export default function Home({ posts }) {
 	return (
 		<View>
 			<Head>
-				<title>G2</title>
+				<title>Patterns</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div
