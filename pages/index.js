@@ -167,7 +167,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 		<Animated
 			animate={{ opacity: 1, y: 0 }}
 			initial={{ opacity: 0, y: 10 }}
-			transition={{ delay: Math.min(0.1 * (index + 1), 1) }}
+			transition={{ delay: Math.min(0.06 * (index + 1), 0.6) }}
 		>
 			<VStack
 				css={{ paddingBottom: 16 }}
@@ -262,7 +262,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 					</Snapshot>
 				</a>
 
-				<VStack spacing={1}>
+				<VStack spacing={0.5}>
 					<Text weight={500} css={{ opacity: 0.5 }} size={12}>
 						{category}
 					</Text>
