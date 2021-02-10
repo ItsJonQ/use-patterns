@@ -23,7 +23,7 @@ import { parse } from '@wordpress/block-serialization-default-parser';
 import { useDrag } from 'react-use-gesture';
 
 const initialFrameContent = `
-<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/twentytwentyone.css" id="theme-stylesheet" /><style>body { padding: 20px; pointer-events: none; }</style></head><body><div></div></body></html>
+<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/twentytwentyone.css" id="theme-stylesheet" /><style>body { pointer-events: none; }</style></head><body><div></div></body></html>
 `;
 
 const ContentFrame = ({ content, title }) => {

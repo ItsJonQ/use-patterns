@@ -21,7 +21,7 @@ import { SEO, SiteFooter, ThemeSwitcher } from '../components';
 import copy from 'copy-to-clipboard';
 
 const initialFrameContent = `
-<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link id="theme-stylesheet" rel="stylesheet" href="/stylesheets/twentytwentyone.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; overflow: hidden; margin: 0; padding: 40px; }</style></head><body><div></div></body></html>
+<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link id="theme-stylesheet" rel="stylesheet" href="/stylesheets/twentytwentyone.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><style>body { display: flex; min-height: 100vh; align-items: center; justify-content: center; overflow: hidden; margin: 0; padding: 0px; } body > div { width: 100%; }</style></head><body><div></div></body></html>
 `;
 
 const Snapshot = styled.div`
@@ -82,15 +82,15 @@ const Overlay = styled.div`
 	z-index: 1;
 	background: linear-gradient(
 		to bottom,
-		rgba(0, 0, 0, 0.24) 0%,
-		rgba(0, 0, 0, 0.24) 70%,
-		rgba(0, 0, 0, 0.24) 71%,
-		rgba(0, 0, 0, 0.6) 100%
+		rgba(0, 0, 0, 0.5) 0%,
+		rgba(0, 0, 0, 0.5) 70%,
+		rgba(0, 0, 0, 0.5) 71%,
+		rgba(0, 0, 0, 0.8) 100%
 	);
 	pointer-events: none;
 	opacity: 0;
 	transition: opacity 160ms linear;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 10px rgba(0, 0, 0, 0.5);
 
 	*:hover > & {
 		opacity: 1;
@@ -133,11 +133,6 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 
 	const handleOnDragStart = (event) => {
 		setIsDragging(true);
-		event.dataTransfer.setDragImage(
-			wrapperRef.current,
-			wrapperRef.current.clientWidth / 2,
-			wrapperRef.current.clientHeight / 2
-		);
 		event.dataTransfer.setData('text', JSON.stringify(data));
 	};
 
@@ -154,7 +149,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 	React.useEffect(() => {
 		const handleOnResize = () => {
 			try {
-				setFrameHeight(wrapperRef.current.clientWidth);
+				setFrameHeight(wrapperRef.current.clientWidth * 1);
 				setFrameScale(wrapperRef.current.clientWidth / 1400);
 			} catch (err) {}
 		};
@@ -174,22 +169,22 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 			initial={{ opacity: 0, y: 10 }}
 			transition={{ delay: Math.min(0.1 * (index + 1), 1) }}
 		>
-			<a
-				href={`/patterns/${slug}`}
-				style={{
-					display: 'block',
-					height: '100%',
-					textDecoration: 'none',
-					outline: 'none',
-				}}
-				draggable
-				onDragStart={handleOnDragStart}
-				onDragEnd={handleOnDragEnd}
+			<VStack
+				css={{ paddingBottom: 16 }}
+				spacing={3}
+				data-dragging={isDragging}
 			>
-				<VStack
-					css={{ paddingBottom: 16 }}
-					spacing={3}
-					data-dragging={isDragging}
+				<a
+					href={`/patterns/${slug}`}
+					style={{
+						display: 'block',
+						height: '100%',
+						textDecoration: 'none',
+						outline: 'none',
+					}}
+					draggable
+					onDragStart={handleOnDragStart}
+					onDragEnd={handleOnDragEnd}
 				>
 					<Snapshot
 						data-dragging={isDragging}
@@ -245,18 +240,18 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 								animate={{ opacity: 1 }}
 								initial={{ opacity: 0 }}
 								transition={{ delay: 0.1 }}
+								style={{ width: '100%' }}
 							>
-								<div>
-									<div
-										dangerouslySetInnerHTML={{
-											__html: content,
-										}}
-										style={{
-											pointerEvents: 'none',
-											userSelect: 'none',
-										}}
-									/>
-								</div>
+								<div
+									dangerouslySetInnerHTML={{
+										__html: content,
+									}}
+									style={{
+										pointerEvents: 'none',
+										userSelect: 'none',
+										width: '100%',
+									}}
+								/>
 							</Animated>
 							<FrameContextConsumer>
 								{({ document }) => {
@@ -265,16 +260,17 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 							</FrameContextConsumer>
 						</Frame>
 					</Snapshot>
-					<VStack spacing={1}>
-						<Text weight={500} css={{ opacity: 0.5 }} size={12}>
-							{category}
-						</Text>
-						<Heading size={4} weight={600} truncate>
-							{title}
-						</Heading>
-					</VStack>
+				</a>
+
+				<VStack spacing={1}>
+					<Text weight={500} css={{ opacity: 0.5 }} size={12}>
+						{category}
+					</Text>
+					<Heading size={4} weight={600} truncate>
+						{title}
+					</Heading>
 				</VStack>
-			</a>
+			</VStack>
 		</Animated>
 	);
 };

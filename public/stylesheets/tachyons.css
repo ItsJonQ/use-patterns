@@ -1809,47 +1809,47 @@
 */
 
 .lh-solid {
-	line-height: 1;
+	line-height: 1 !important;
 }
 .lh-title {
-	line-height: 1.25;
+	line-height: 1.25 !important;
 }
 .lh-copy {
-	line-height: 1.5;
+	line-height: 1.5 !important;
 }
 
 @media screen and (min-width: 30em) {
 	.lh-solid-ns {
-		line-height: 1;
+		line-height: 1 !important;
 	}
 	.lh-title-ns {
-		line-height: 1.25;
+		line-height: 1.25 !important;
 	}
 	.lh-copy-ns {
-		line-height: 1.5;
+		line-height: 1.5 !important;
 	}
 }
 
 @media screen and (min-width: 30em) and (max-width: 60em) {
 	.lh-solid-m {
-		line-height: 1;
+		line-height: 1 !important;
 	}
 	.lh-title-m {
-		line-height: 1.25;
+		line-height: 1.25 !important;
 	}
 	.lh-copy-m {
-		line-height: 1.5;
+		line-height: 1.5 !important;
 	}
 }
 
 @media screen and (min-width: 60em) {
 	.lh-solid-l {
-		line-height: 1;
+		line-height: 1 !important;
 	}
 	.lh-title-l {
-		line-height: 1.25;
+		line-height: 1.25 !important;
 	}
 	.lh-copy-l {
-		line-height: 1.5;
+		line-height: 1.5 !important;
 	}
 }
