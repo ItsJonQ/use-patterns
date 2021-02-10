@@ -10,8 +10,8 @@ date: '2021-02-10T15:00:00'
 
 <div class="wp-block-group__inner-container">
 
-<!-- wp:heading {"textAlign":"center"} -->
-<h2 class="f1 f-5-m f-6-l mt0 lh-solid has-text-align-center"><strong>Think.<br />Design.<br />Build.</strong></h2>
+<!-- wp:heading {"textAlign":"center","style":{"typography":{"lineHeight":"1"}}} -->
+<h2 class="f1 f-5-m f-6-l mt0 lh-solid has-text-align-center" style="line-height:1"><strong>Think.<br />Design.<br />Build.</strong></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"textAlign":"center"} -->
