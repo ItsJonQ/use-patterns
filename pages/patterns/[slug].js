@@ -11,6 +11,7 @@ import {
 	Text,
 	View,
 	VStack,
+	ViewportTablet,
 } from '@wp-g2/components';
 import { styled } from '@wp-g2/styles';
 import copy from 'copy-to-clipboard';
@@ -132,36 +133,38 @@ function AppHeader({ content, title }) {
 							</Link>
 							<Heading size={4}>{title}</Heading>
 						</VStack>
-						<View>
-							<HStack>
-								<Button
-									draggable
-									size="large"
-									onDragStart={handleOnDragStart}
-									css={`
-										cursor: grab;
-										&:active {
-											cursor: grabbing;
-										}
-									`}
-								>
-									Drag/Drop
-								</Button>
-								<Button
-									variant="primary"
-									size="large"
-									onClick={handleOnClick}
-								>
-									Copy Pattern
-								</Button>
-								<Spacer>
-									<View css={{ width: 8 }} />
-								</Spacer>
-								<View>
-									<ThemeSwitcher />
-								</View>
-							</HStack>
-						</View>
+						<ViewportTablet>
+							<View>
+								<HStack>
+									<Button
+										draggable
+										size="large"
+										onDragStart={handleOnDragStart}
+										css={`
+											cursor: grab;
+											&:active {
+												cursor: grabbing;
+											}
+										`}
+									>
+										Drag/Drop
+									</Button>
+									<Button
+										variant="primary"
+										size="large"
+										onClick={handleOnClick}
+									>
+										Copy Pattern
+									</Button>
+									<Spacer>
+										<View css={{ width: 8 }} />
+									</Spacer>
+									<View>
+										<ThemeSwitcher />
+									</View>
+								</HStack>
+							</View>
+						</ViewportTablet>
 					</HStack>
 				</Container>
 			</VStack>
