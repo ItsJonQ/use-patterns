@@ -204,22 +204,59 @@ export default function Post({ post }) {
 }
 
 const patternContent = `
-<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"20vh","bottom":"20vh"}}}} -->
-<div class="wp-block-group alignwide" style="padding-top:20vh;padding-bottom:20vh">
+<!-- wp:columns {"align":"wide"} -->
+<div class="wp-block-columns alignwide">
 
-<div class="wp-block-group__inner-container">
-
-<!-- wp:heading {"textAlign":"center"} -->
-<h2 class="f1 f-5-m f-6-l mt0 lh-solid has-text-align-center"><strong>Think.<br />Design.<br />Build.</strong></h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"textAlign":"center"} -->
-<p class="o-70 my0 has-text-align-center">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1"}}} -->
+<p class="has-text-align-center o-70" style="line-height:1">Lorem</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:paragraph {"align":"center","fontSize":"extra-large"} -->
+<p class="has-text-align-center has-extra-large-font-size f1">3</p>
+<!-- /wp:paragraph -->
 </div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1"}}} -->
+<p class="has-text-align-center o-70" style="line-height:1">Ipsum</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"align":"center","fontSize":"extra-large"} -->
+<p class="has-text-align-center has-extra-large-font-size f1">200+</p>
+<!-- /wp:paragraph -->
 </div>
-<!-- /wp:group -->
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1"}}} -->
+<p class="has-text-align-center o-70" style="line-height:1">Dolor</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"align":"center","fontSize":"extra-large"} -->
+<p class="has-text-align-center has-extra-large-font-size f1">40%</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1"}}} -->
+<p class="has-text-align-center o-70" style="line-height:1">Sit</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"align":"center","fontSize":"extra-large"} -->
+<p class="has-text-align-center has-extra-large-font-size f1">5</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:column -->
+
+</div>
+<!-- /wp:columns -->
 `;
 
 const post = {
