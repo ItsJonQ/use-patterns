@@ -5,6 +5,9 @@ keywords: ['image', 'side', 'cta', 'left']
 date: '2021-02-10 9:00:00'
 ---
 
+<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"2em","bottom":"2em"}}}} -->
+<div class="wp-block-group alignwide" style="padding-top:2em;padding-bottom:2em"><div class="wp-block-group__inner-container">
+
 <!-- wp:columns {"align":"wide"} -->
 <div class="wp-block-columns alignwide">
 <!-- wp:column -->
@@ -41,3 +44,6 @@ date: '2021-02-10 9:00:00'
 <!-- /wp:column -->
 </div>
 <!-- /wp:columns -->
+
+</div></div>
+<!-- /wp:group -->

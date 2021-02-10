@@ -97,10 +97,6 @@ const ContentFrame = ({ content, title }) => {
 	);
 };
 
-const DRAG_HANDLE_WIDTH = 4;
-const RESIZABLE_DEFAULT_WIDTH =
-	typeof window !== 'undefined' ? window.innerWidth : 300;
-
 const DragHandle = () => (
 	<View
 		as="button"
