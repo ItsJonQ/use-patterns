@@ -22,7 +22,7 @@ date: '2021-02-09 16:48:00'
 <h2 class="f2 f1-l mt0 lh-solid has-black-color has-text-color"><strong>A better way to build with blocks and patterns</strong></h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"align":"left",,"textColor":"black","fontSize":"large","style":{"typography":{"lineHeight":"1.6"}}} -->
+<!-- wp:paragraph {"align":"left","textColor":"black","fontSize":"large","style":{"typography":{"lineHeight":"1.6"}}} -->
 <p class="has-large-font-size o-70 my0 has-black-color has-text-color" style="line-height:1.6">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
 <!-- /wp:paragraph -->
 
