@@ -14,7 +14,7 @@ date: '2021-02-08T15:00:00'
 <h2 class="has-text-align-center f2 f1-l mt0 lh-solid"><strong>A better way to build with blocks and patterns</strong></h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"className":"dsadsa","fontSize":"large","textAlign":"center","style":{"typography":{"lineHeight":"1.6"}}} -->
+<!-- wp:paragraph {"fontSize":"large","textAlign":"center","style":{"typography":{"lineHeight":"1.6"}}} -->
 <p class="has-text-align-center has-large-font-size o-70 my0" style="line-height:1.6">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
 <!-- /wp:paragraph -->
 

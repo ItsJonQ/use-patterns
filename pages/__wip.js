@@ -1,97 +1,176 @@
-import Head from 'next/head';
 import {
-	View,
-	Container,
-	Animated,
-	VStack,
 	Button,
+	Container,
+	Elevation,
 	Heading,
-	Text,
 	HStack,
+	Spacer,
+	Surface,
+	Text,
+	View,
+	VStack,
 } from '@wp-g2/components';
+import { styled } from '@wp-g2/styles';
 import copy from 'copy-to-clipboard';
-import Frame from 'react-frame-component';
+import { ContentFrame, SEO, ThemeSwitcher } from '../components';
 import Link from 'next/link';
+import { parse } from '@wordpress/block-serialization-default-parser';
 import { useDrag } from 'react-use-gesture';
 
-const initialFrameContent = `
-<!DOCTYPE html><html><head><link rel="stylesheet" href="/stylesheets/tachyons.css" /><link rel="stylesheet" href="/stylesheets/block-library-styles.css" /><link rel="stylesheet" href="/stylesheets/twentytwentyone.css" /><style>body { padding: 20px; pointer-events: none; }</style></head><body><div></div></body></html>
+const DragHandleContainerLeft = styled.div`
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.08);
+	left: -20px;
+	width: 20px;
+	cursor: grab;
+
+	&:active {
+		cursor: grabbing;
+	}
 `;
 
-const ContentFrame = ({ content }) => {
-	const handleOnClick = (p) => {
-		copy(p, { format: 'text/plain' });
+const DragHandleContainerRight = styled.div`
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.08);
+	right: -20px;
+	width: 20px;
+	cursor: grab;
+
+	&:active {
+		cursor: grabbing;
+	}
+`;
+
+const DragHandle = styled.button`
+	appearance: none;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 99999px;
+	border: none;
+	cursor: grab;
+	height: 60px;
+	left: 7px;
+	outline: none;
+	padding: 0;
+	position: absolute;
+	top: clamp(100px, 500px, 40vh);
+	width: 6px;
+
+	*:hover > & {
+		background: rgba(255, 255, 255, 0.3);
+	}
+	*:active > & {
+		cursor: grabbing;
+		background: rgba(255, 255, 255, 0.5);
+	}
+`;
+
+const ContentFrameWrapper = styled.div`
+	border-left: 1px solid rgba(0, 0, 0, 0.04);
+	border-right: 1px solid rgba(0, 0, 0, 0.04);
+	height: 100%;
+	position: relative;
+	z-index: 1;
+`;
+
+const ViewportWrapper = styled.div`
+	background: #111;
+	padding: 0 20px;
+	height: calc(100vh - 70px);
+	overflow: hidden;
+`;
+
+const Viewport = styled.div`
+	margin: auto;
+	min-width: 320px;
+	position: relative;
+	max-width: 100%;
+	height: 100%;
+`;
+
+function AppHeader({ content, title }) {
+	const data = {
+		type: 'inserter',
+		blocks: parse(content.trim()),
+		rawContent: content.trim(),
+		contentSrc: 'use_patterns',
+	};
+
+	const handleOnDragStart = (event) => {
+		event.dataTransfer.setData('text', JSON.stringify(data));
+	};
+
+	const handleOnClick = () => {
+		copy(content, { format: 'text/plain' });
 	};
 
 	return (
-		<div
-			style={{
-				width: '100%',
-				lineHeight: 0,
-				height: '100%',
-				verticalAlign: 'middle',
-			}}
-		>
-			<Animated
-				animate={{ opacity: 1 }}
-				initial={{ opacity: 0 }}
-				transition={{ delay: 0.1 }}
-				css={{
-					height: '100%',
-				}}
+		<Surface css={{ position: 'relative', zIndex: 100 }}>
+			<VStack
+				css={{ height: 70, padding: '8px 20px' }}
+				alignment="center"
 			>
-				<Frame
-					initialContent={initialFrameContent}
-					style={{
-						border: 'none',
-						width: '100%',
-						height: '100%',
-					}}
-				>
-					<Animated
-						animate={{ opacity: 1 }}
-						initial={{ opacity: 0 }}
-						transition={{ delay: 0.1 }}
-					>
-						<div onClick={() => handleOnClick(content)}>
-							<div
-								dangerouslySetInnerHTML={{
-									__html: content,
-								}}
-							/>
-						</div>
-					</Animated>
-				</Frame>
-			</Animated>
-		</div>
+				<Container>
+					<HStack>
+						<VStack spacing={1}>
+							<Link href="/">
+								<a
+									style={{
+										textDecoration: 'none',
+									}}
+								>
+									<Text weight={600} variant="muted">
+										Patterns
+									</Text>
+								</a>
+							</Link>
+							<Heading size={4}>{title}</Heading>
+						</VStack>
+						<View>
+							<HStack>
+								<Button
+									draggable
+									size="large"
+									onDragStart={handleOnDragStart}
+									css={`
+										cursor: grab;
+										&:active {
+											cursor: grabbing;
+										}
+									`}
+								>
+									Drag/Drop
+								</Button>
+								<Button
+									variant="primary"
+									size="large"
+									onClick={handleOnClick}
+								>
+									Copy Pattern
+								</Button>
+								<Spacer>
+									<View css={{ width: 8 }} />
+								</Spacer>
+								<View>
+									<ThemeSwitcher />
+								</View>
+							</HStack>
+						</View>
+					</HStack>
+				</Container>
+			</VStack>
+			<Elevation value={5} css={{ opacity: 0.2 }} />
+		</Surface>
 	);
-};
-
-const DRAG_HANDLE_WIDTH = 4;
-const RESIZABLE_DEFAULT_WIDTH =
-	typeof window !== 'undefined' ? window.innerWidth : 300;
-
-const DragHandle = () => (
-	<View
-		css={{
-			position: 'absolute',
-			top: 'clamp(100px, 500px, 40vh)',
-			left: 7,
-			background: 'rgba(0,0,0,0.3)',
-			borderRadius: 99999,
-			height: 60,
-			width: 6,
-			cursor: 'grab',
-			'&:active': {
-				cursor: 'grabbing',
-			},
-		}}
-	/>
-);
+}
 
 export default function Post({ post }) {
 	const [x, setX] = React.useState(0);
 	const width = `calc(100% - ${x}px)`;
+	const frameContainerRef = React.useRef();
 
 	const dragGestures = useDrag((dp) => {
 		const { dir } = dp.args[0];
@@ -101,163 +180,46 @@ export default function Post({ post }) {
 		}
 	});
 
-	const handleOnClick = () => {
-		copy(post.content, { format: 'text/plain' });
-	};
-
 	return (
-		<div>
-			<Head>
-				<title>Patterns</title>
-				<link rel="icon" href="/favicon.ico" />
-				<link
-					rel="preload"
-					as="style"
-					href="/stylesheets/tachyons.css"
-				/>
-				<link
-					rel="preload"
-					as="style"
-					href="/stylesheets/block-library-styles.css"
-				/>
-				<link
-					rel="preload"
-					as="style"
-					href="/stylesheets/twentytwentyone.css"
-				/>
-			</Head>
-
-			<div>
-				<VStack
-					css={{ height: 80, padding: '8px 20px' }}
-					alignment="center"
-				>
-					<Container>
-						<HStack>
-							<View>
-								<Link href="/">
-									<a>
-										<Text>Patterns</Text>
-									</a>
-								</Link>
-								<Heading>{post.title}</Heading>
-							</View>
-							<View>
-								<Button
-									variant="primary"
-									onClick={handleOnClick}
-								>
-									Copy
-								</Button>
-							</View>
-						</HStack>
-					</Container>
-				</VStack>
-				<View
-					css={{
-						background: '#ddd',
-						padding: '0 20px',
-						height: 'calc(100vh - 80px)',
-						overflow: 'hidden',
-					}}
-				>
-					<div
-						style={{
-							width,
-							margin: 'auto',
-							minWidth: 320,
-							position: 'relative',
-							maxWidth: '100%',
-							height: '100%',
-						}}
+		<>
+			<SEO title={post.title} />
+			<AppHeader {...post} />
+			<ViewportWrapper>
+				<Viewport style={{ width }}>
+					<DragHandleContainerLeft {...dragGestures({ dir: 'left' })}>
+						<DragHandle title="Drag to resize" />
+					</DragHandleContainerLeft>
+					<ContentFrameWrapper ref={frameContainerRef}>
+						<ContentFrame {...post} />
+					</ContentFrameWrapper>
+					<DragHandleContainerRight
+						{...dragGestures({ dir: 'right' })}
 					>
-						<View
-							css={{
-								position: 'absolute',
-								top: 0,
-								bottom: 0,
-								background: 'rgba(255,255,255,0.2)',
-								left: -20,
-								width: 20,
-								cursor: 'grab',
-								'&:active': {
-									cursor: 'grabbing',
-								},
-							}}
-							{...dragGestures({ dir: 'left' })}
-						>
-							<DragHandle />
-						</View>
-						<View
-							css={{
-								borderLeft: '1px solid rgba(0, 0, 0, 0.2)',
-								borderRight: '1px solid rgba(0, 0, 0, 0.2)',
-								height: '100%',
-							}}
-						>
-							<ContentFrame {...post} />
-						</View>
-						<View
-							css={{
-								position: 'absolute',
-								top: 0,
-								bottom: 0,
-								right: -20,
-								background: 'rgba(255,255,255,0.2)',
-								width: 20,
-								cursor: 'grab',
-								'&:active': {
-									cursor: 'grabbing',
-								},
-							}}
-							{...dragGestures({ dir: 'right' })}
-						>
-							<DragHandle />
-						</View>
-					</div>
-				</View>
-			</div>
-		</div>
+						<DragHandle title="Drag to resize" />
+					</DragHandleContainerRight>
+				</Viewport>
+			</ViewportWrapper>
+		</>
 	);
 }
 
 const patternContent = `
-<!-- wp:columns {"align":"wide"} -->
-<div class="wp-block-columns alignwide">
-<!-- wp:column -->
-<div class="wp-block-column">
+<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"20vh","bottom":"20vh"}}}} -->
+<div class="wp-block-group alignwide" style="padding-top:20vh;padding-bottom:20vh">
 
-<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://images.unsplash.com/photo-1585424529208-7bc775e92a74?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1280&amp;q=80" alt="" /></figure>
-<!-- /wp:image --></div>
-<!-- /wp:column -->
-
-<!-- wp:column -->
-<div class="wp-block-column">
-
-<!-- wp:group -->
-<div class="wp-block-group">
 <div class="wp-block-group__inner-container">
 
-<!-- wp:heading {"fontSize":"large"} -->
-<h2 class="has-large-font-size f3 f2-l mt0 lh-solid"><strong>A better way to build</strong></h2>
+<!-- wp:heading {"textAlign":"center"} -->
+<h2 class="f1 f-5-m f-6-l mt0 lh-solid has-text-align-center"><strong>Think.<br />Design.<br />Build.</strong></h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size o-70 my0">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
+<!-- wp:paragraph {"textAlign":"center"} -->
+<p class="o-70 my0 has-text-align-center">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p><a href="https://use-patterns.vercel.app">Explore</a></p>
-<!-- /wp:paragraph -->
-
-</div></div>
+</div>
+</div>
 <!-- /wp:group -->
-
-</div>
-<!-- /wp:column -->
-</div>
-<!-- /wp:columns -->
 `;
 
 const post = {
