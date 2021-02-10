@@ -97,7 +97,7 @@ const Overlay = styled.div`
 	}
 `;
 
-const PreviewFrame = ({ content, title, isDragging }) => {
+const FrameSnapshot = ({ content, title, isDragging }) => {
 	const wrapperRef = React.useRef();
 	const styleRef = React.useRef();
 	const [frameHeight, setFrameHeight] = React.useState('100%');
@@ -222,4 +222,4 @@ const PreviewFrame = ({ content, title, isDragging }) => {
 	);
 };
 
-export default PreviewFrame;
+export default FrameSnapshot;

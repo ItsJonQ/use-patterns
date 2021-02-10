@@ -7,11 +7,18 @@ import {
 	Container,
 	HStack,
 	Text,
-	Card,
 } from '@wp-g2/components';
+import { styled } from '@wp-g2/styles';
 import { getAllPatterns } from '../lib/api';
 import { parse } from '@wordpress/block-serialization-default-parser';
 import { FrameSnapshot, SEO, SiteFooter, ThemeSwitcher } from '../components';
+
+const PreviewLink = styled.a`
+	display: block;
+	height: 100%;
+	text-decoration: none;
+	outline: none;
+`;
 
 const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 	const [category] = categories;
@@ -44,14 +51,8 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 				spacing={3}
 				data-dragging={isDragging}
 			>
-				<a
+				<PreviewLink
 					href={`/patterns/${slug}`}
-					style={{
-						display: 'block',
-						height: '100%',
-						textDecoration: 'none',
-						outline: 'none',
-					}}
 					draggable
 					onDragStart={handleOnDragStart}
 					onDragEnd={handleOnDragEnd}
@@ -61,8 +62,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 						content={content}
 						title={title}
 					/>
-				</a>
-
+				</PreviewLink>
 				<VStack spacing={0.5}>
 					<Text weight={500} css={{ opacity: 0.5 }} size={12}>
 						{category}
@@ -76,48 +76,59 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 	);
 };
 
+function AppHeader() {
+	return (
+		<Container css={{ padding: 20 }}>
+			<HStack>
+				<Heading>Patterns</Heading>
+				<View>
+					<ThemeSwitcher />
+				</View>
+			</HStack>
+		</Container>
+	);
+}
+
+function PreviewGrid({ children }) {
+	return (
+		<Grid
+			gap={5}
+			css={`
+				grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+				@media (min-width: 640px) {
+					grid-template-columns: repeat(
+						auto-fill,
+						minmax(280px, 1fr)
+					);
+				}
+				@media (min-width: 880px) {
+					grid-template-columns: repeat(
+						auto-fill,
+						minmax(1fr, 300px)
+					);
+				}
+			`}
+		>
+			{children}
+		</Grid>
+	);
+}
+
 export default function Home({ posts }) {
 	return (
 		<View>
 			<SEO />
-			<Container css={{ padding: 20 }}>
-				<HStack>
-					<Heading>Patterns</Heading>
-					<View>
-						<ThemeSwitcher />
-					</View>
-				</HStack>
-			</Container>
+			<AppHeader />
 			<Container
 				css={{
 					padding: 20,
 				}}
 			>
-				<Grid
-					gap={5}
-					css={`
-						grid-template-columns: repeat(
-							auto-fill,
-							minmax(300px, 1fr)
-						);
-						@media (min-width: 640px) {
-							grid-template-columns: repeat(
-								auto-fill,
-								minmax(280px, 1fr)
-							);
-						}
-						@media (min-width: 880px) {
-							grid-template-columns: repeat(
-								auto-fill,
-								minmax(1fr, 300px)
-							);
-						}
-					`}
-				>
+				<PreviewGrid>
 					{posts.map((post, index) => (
 						<ContentFrame {...post} key={post.id} index={index} />
 					))}
-				</Grid>
+				</PreviewGrid>
 			</Container>
 			<SiteFooter />
 		</View>
