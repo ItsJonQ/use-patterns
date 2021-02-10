@@ -1,8 +1,8 @@
 ---
-title: 'Feature Grid'
+title: 'Feature Grid with Images'
 categories: ['Featured', 'Section']
-keywords: ['grid', 'features']
-date: '2021-02-07T12:00:00'
+keywords: ['grid', 'features', 'image']
+date: '2021-02-10T12:00:00'
 ---
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"10vh","bottom":"10vh"}}}} -->
@@ -26,43 +26,42 @@ date: '2021-02-07T12:00:00'
 <div class="wp-block-columns alignwide">
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:heading {"level":4} -->
-<h4 class="mb3">Responsive</h4>
-<!-- /wp:heading -->
+<div class="wp-block-column">
+
+<!-- wp:image {"align":"wide","sizeSlug":"large"} -->
+<figure class="wp-block-image alignwide size-large"><img src="https://images.unsplash.com/photo-1585424529208-7bc775e92a74?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1280&amp;q=80" alt=""/></figure>
+<!-- /wp:image -->
 
 <!-- wp:paragraph {"fontSize":"small"} -->
 <p class="has-small-font-size o-70 mt0 mb3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:paragraph -->
+</div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:heading {"level":4} -->
-<h4 class="mb3">Themable</h4>
-<!-- /wp:heading -->
+<div class="wp-block-column">
+
+<!-- wp:image {"align":"wide","sizeSlug":"large"} -->
+<figure class="wp-block-image alignwide size-large"><img src="https://images.unsplash.com/photo-1585424529208-7bc775e92a74?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1280&amp;q=80" alt=""/></figure>
+<!-- /wp:image -->
 
 <!-- wp:paragraph {"fontSize":"small"} -->
 <p class="has-small-font-size o-70 mt0 mb3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:paragraph -->
+</div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:heading {"level":4} -->
-<h4 class="mb3">Customizable</h4>
-<!-- /wp:heading -->
+<div class="wp-block-column">
+
+<!-- wp:image {"align":"wide","sizeSlug":"large"} -->
+<figure class="wp-block-image alignwide size-large"><img src="https://images.unsplash.com/photo-1585424529208-7bc775e92a74?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1280&amp;q=80" alt=""/></figure>
+<!-- /wp:image -->
 
 <!-- wp:paragraph {"fontSize":"small"} -->
 <p class="has-small-font-size o-70 mt0 mb3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:column -->
-
-<!-- wp:column -->
-<div class="wp-block-column"><!-- wp:heading {"level":4} -->
-<h4 class="mb3">Core</h4>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"fontSize":"small"} -->
-<p class="has-small-font-size o-70 mt0 mb3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
-<!-- /wp:paragraph --></div>
+<!-- /wp:paragraph -->
+</div>
 <!-- /wp:column -->
 
 </div>

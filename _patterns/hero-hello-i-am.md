@@ -2,7 +2,7 @@
 title: 'Hello. I Am.'
 categories: ['Hero', 'Section']
 keywords: ['words', 'text', 'introduction', 'personal']
-date: '2021-02-08 15:48:00'
+date: '2021-02-08T15:48:00'
 ---
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"20vh","bottom":"20vh"}}}} -->

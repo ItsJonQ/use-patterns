@@ -2,7 +2,7 @@
 title: 'Big Picture'
 categories: ['Hero', 'Section']
 keywords: ['image', 'picture', 'center']
-date: '2021-02-08 15:00:00'
+date: '2021-02-08T15:00:00'
 ---
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"10vh","bottom":"10vh"}}}} -->

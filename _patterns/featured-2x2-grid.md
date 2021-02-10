@@ -2,7 +2,7 @@
 title: 'Centered 2x2 Grid'
 categories: ['Featured', 'Section']
 keywords: ['grid', 'centered']
-date: '2021-02-07 09:00:00'
+date: '2021-02-07T09:00:00'
 ---
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"10vh","bottom":"10vh"}}}} -->

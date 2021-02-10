@@ -2,7 +2,7 @@
 title: 'Cover Full'
 categories: ['Hero', 'Section']
 keywords: ['cover', 'picture', 'full']
-date: '2021-02-09 17:48:00'
+date: '2021-02-09T17:48:00'
 ---
 
 <!-- wp:cover {"url":"https://images.unsplash.com/photo-1585424529208-7bc775e92a74?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1280&amp;q=80","dimRatio":40,"overlayColor":"black","minHeight":100,"minHeightUnit":"vh","contentPosition":"center center","align":"full"} -->

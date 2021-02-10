@@ -2,7 +2,7 @@
 title: 'Side by Side with Image (Right)'
 categories: ['CTA', 'Section']
 keywords: ['image', 'side', 'cta', 'right']
-date: '2021-02-10 9:10:00'
+date: '2021-02-10T9:10:00'
 ---
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"2em","bottom":"2em"}}}} -->

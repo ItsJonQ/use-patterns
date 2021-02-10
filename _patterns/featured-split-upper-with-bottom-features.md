@@ -2,7 +2,7 @@
 title: 'Split Upper with Bottom Features'
 categories: ['Featured', 'Section']
 keywords: ['split', 'image', features]
-date: '2021-02-07 18:25:00'
+date: '2021-02-07T18:25:00'
 ---
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"10vh","bottom":"10vh"}}}} -->

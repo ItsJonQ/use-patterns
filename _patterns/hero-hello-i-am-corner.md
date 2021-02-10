@@ -2,7 +2,7 @@
 title: 'Hello. I Am. (Corner)'
 categories: ['Hero', 'Section']
 keywords: ['words', 'text', 'introduction', 'personal', 'bottom', 'corner']
-date: '2021-02-09 10:48:00'
+date: '2021-02-09T10:48:00'
 ---
 
 <!-- wp:cover {"customOverlayColor":"rgba(0,0,0,0)","minHeight":80,"minHeightUnit":"vh","contentPosition":"bottom left","align":"wide"} -->

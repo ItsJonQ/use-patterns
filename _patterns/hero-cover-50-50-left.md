@@ -2,7 +2,7 @@
 title: 'Cover 50/50 (Left)'
 categories: ['Hero', 'Section']
 keywords: ['cover', 'picture', 'split', 'left']
-date: '2021-02-09 15:48:00'
+date: '2021-02-09T15:48:00'
 ---
 
 <!-- wp:group {"align":"full"} -->

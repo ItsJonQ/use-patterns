@@ -2,7 +2,7 @@
 title: 'Side by Side with Image'
 categories: ['Featured', 'Section']
 keywords: ['image', 'side']
-date: '2021-02-07 11:00:00'
+date: '2021-02-07T11:00:00'
 ---
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"10vh","bottom":"10vh"}}}} -->
