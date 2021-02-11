@@ -2,9 +2,12 @@ import {
 	Grid,
 	View,
 	Animated,
+	AnimatedContainer,
 	VStack,
+	Button,
 	Heading,
 	Container,
+	Spacer,
 	HStack,
 	Text,
 } from '@wp-g2/components';
@@ -19,6 +22,37 @@ const PreviewLink = styled.a`
 	text-decoration: none;
 	outline: none;
 `;
+
+const contentCategories = [
+	{ label: 'All', value: 'All' },
+	{ label: 'CTA', value: 'CTA' },
+	{ label: 'Featured', value: 'Featured' },
+	{ label: 'Hero', value: 'Hero' },
+	{ label: 'Testimonial', value: 'Testimonial' },
+];
+
+const ContentFilter = ({ value, onChange }) => {
+	const handleOnChange = (next) => () => onChange(next);
+
+	return (
+		<HStack alignment="center">
+			{contentCategories.map((category) => {
+				const isActive = category.value === value;
+
+				return (
+					<Button
+						key={category.value}
+						onClick={handleOnChange(category.value)}
+						isSubtle={!isActive}
+						isControl={isActive}
+					>
+						{category.label}
+					</Button>
+				);
+			})}
+		</HStack>
+	);
+};
 
 const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 	const [category] = categories;
@@ -45,6 +79,7 @@ const ContentFrame = ({ categories = [], content, slug, index, title }) => {
 			animate={{ opacity: 1, y: 0 }}
 			initial={{ opacity: 0, y: 10 }}
 			transition={{ delay: Math.min(0.06 * (index + 1), 0.6) }}
+			key={index}
 		>
 			<VStack
 				css={{ paddingBottom: 16 }}
@@ -80,7 +115,9 @@ function AppHeader() {
 	return (
 		<Container css={{ padding: 20 }}>
 			<HStack>
-				<Heading>Patterns</Heading>
+				<PreviewLink href="/">
+					<Heading>Patterns</Heading>
+				</PreviewLink>
 				<View>
 					<ThemeSwitcher />
 				</View>
@@ -115,19 +152,35 @@ function PreviewGrid({ children }) {
 }
 
 export default function Home({ posts }) {
+	const [category, setCategory] = React.useState('All');
+	const content = posts.filter((post) => {
+		return category === 'All' || post.categories.includes(category);
+	});
+
 	return (
 		<View>
 			<SEO />
 			<AppHeader />
+			<Container>
+				<Spacer mb={4} mt={2}>
+					<ContentFilter value={category} onChange={setCategory} />
+				</Spacer>
+			</Container>
 			<Container
 				css={{
 					padding: 20,
 				}}
 			>
 				<PreviewGrid>
-					{posts.map((post, index) => (
-						<ContentFrame {...post} key={post.id} index={index} />
-					))}
+					{content.map((post, index) => {
+						return (
+							<ContentFrame
+								{...post}
+								key={`${post.id}-${index}`}
+								index={index}
+							/>
+						);
+					})}
 				</PreviewGrid>
 			</Container>
 			<SiteFooter />
